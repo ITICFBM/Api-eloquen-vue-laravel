@@ -10,7 +10,7 @@ import axios from 'axios';
         },
         mounted() {
             this.getPokemons();
-            console.log('se carga la función getPokemons y el axios')
+            console.log('se carga la función o el array getPokemons y el axios')
         },
 
         methods: {
