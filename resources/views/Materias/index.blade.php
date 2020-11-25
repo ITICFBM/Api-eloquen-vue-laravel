@@ -14,31 +14,26 @@
                         </div>
                     @endif
 
-                    <post-component inline-template>
+                    <materias-index inline-template>
                         <table class="table table-hover table-striped">
                         <thead>
                             <tr>
-                            <th>Nombre</th>
+                            <th>ID</th>
+                            <th>Materia</th>
                             <th>Operaciones</th>
                             </thead>
                             <body>
-                                <tr v-for="pokemon in pokemons">
-                                <td v-text="pokemon.nombre"></td>
-                                <td>
-                                <button data-target="#exampleModalCenter" title="Ver Materia" type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                                <button type="button" class="btn btn-secondary"><i class="fas fa-pen"></i></button>
-                                <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button></td>
+                            <tr v-for="materia in materias">
+                                <td v-text="materia.id"></td>
+                                <td v-text="materia.nombre"></td>
+                                <td><button>Edit</button></td>
                                 </tr>
                             </body>
 
-                    </post-component>
-                    
+                    </materias-index>
                 </div>
             </div>
         </div>
-        
     </div>
-    
 </div>
 @endsection
-

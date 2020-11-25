@@ -15,8 +15,8 @@ import axios from 'axios';
 
         methods: {
             getPokemons: function () {
-                 axios.get('https://pokeapi.co/api/v2/pokemon').then(response => {
-                    this.pokemons = response.data.results
+                 axios.get('http://127.0.0.1:8001/api/materias').then(response => {
+                    this.pokemons = response.data.materias
                     console.log (this.pokemons);
                 });
             }

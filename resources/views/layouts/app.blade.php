@@ -18,6 +18,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- ICONS FONT AWESOME-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+
 </head>
 <body>
     <div id="app">
@@ -33,7 +36,18 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                    <li class="nav-item active">
+                         <a class="nav-link" href="/Materias">Materias <span class="sr-only">(current)</span></a>
+                     </li>
+                    <li class="nav-item active">
+                         <a class="nav-link" href="#">Alumnos <span class="sr-only">(current)</span></a>
+                     </li>
+                    <li class="nav-item active">
+                         <a class="nav-link" href="#">Profesores <span class="sr-only">(current)</span></a>
+                     </li>
+                    <li class="nav-item active">
+                         <a class="nav-link" href="#">Tutores <span class="sr-only">(current)</span></a>
+                     </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

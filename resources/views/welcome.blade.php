@@ -19,12 +19,12 @@
                         <thead>
                             <tr>
                             <th>Nombre</th>
-                            <th>URL</th>
+                            <!--<th>URL</th>-->
                             </thead>
                             <body>
                                 <tr v-for="pokemon in pokemons">
-                                <td v-text="pokemon.name"></td>
-                                <td v-text="pokemon.url"></td>
+                                <td v-text="pokemon.nombre"></td>
+                                <!--<td v-text="pokemon.url"></td>-->
                                 </tr>
                             </body>
 
