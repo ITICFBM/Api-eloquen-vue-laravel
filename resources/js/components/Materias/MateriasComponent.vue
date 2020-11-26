@@ -1,7 +1,17 @@
 <template>
     <div>
+          <div class="row justify-content-between">
+                <div class="col-4">
+                Tabla Materias
+                </div>
+                <div class="col-4">
+                            <button data-toggle="modal" data-target="#guardarModal" type="button" class="justify-content-center btn btn-primary"><i class="fas fa-plus-circle"></i></button>
+                </div>
+            </div>
+
             <table class="table">
                             <thead class="thead-dark">
+
                             <tr>
                                 <th scope="col">Clave</th>
                                 <th scope="col">Nombre</th>
@@ -14,7 +24,7 @@
                                 <td v-text="materia.nombre"></td>
                                 <td>
                                 <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-secondary" v-on:click="updateid(materia)"><i class="fas fa-pen"></i></button>
-                                <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button></td>
+                                <button data-toggle="modal" data-target="#deletemateria" type="button" class="btn btn-danger" v-on:click="deleteid(materia)"><i class="fas fa-trash"></i></button></td>
                                 </tr>
                                 </tbody>
             </table>
@@ -47,6 +57,55 @@
                         </div>
 
                 </div>
+            <!-- Modal para agrer materia -->
+                <div class="modal fade" id="guardarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Alta De Materia Desde un componente de vue</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form >
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <input type="text"  class="form-control" id="recipient-name">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <button ttype="submit" name="action" class="btn btn-primary">Guardar</button>
+                                </div>
+                                </form>
+                            </div>
+                        
+                            </div>
+
+                        </div>
+
+                </div>
+                <!-- delete materia -->
+                <div class="modal fade" id="deletemateria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Eliminar Materia</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h4>¿Esta seguro que quieres eliminar la materia <span class="badge badge-pill badge-warning">{{materiadelete.nombre}}</span>?</h4>
+                                <!--{{materiadelete}}-->                            
+                                </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-danger" @click="deleteMateria(materiadelete.id)">Eliminar</button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
     </div>
 </template>
 
@@ -56,10 +115,14 @@
             return{
                 //array para obtener todos las materias
                 materias: [],
-                //array para obtener solo una materia
-                //materia: [],
+                //array para obtener eliminar una materia materia
+                materiadelete: [],
                 //array para modificar una materia en especifico
-                materiaedit: []
+                materiaedit: [],
+                //guardar la materia
+                nueamateria:{
+                    nombre : ""
+                }
             }
         },
         mounted() {
@@ -93,6 +156,22 @@
                 }).catch(error=>{
 
                 });
+            },
+            deleteid(id){
+                this.materiadelete =id; 
+            },
+            deleteMateria(id){
+                let urldeleteMateria = 'materias/' + id;
+                axios.delete(urldeleteMateria,this.materiadelete).then (response=>{
+                    if(response.data.error){
+                    //mensaje de error
+                    consolo.log('ocurrio un error');
+                }else{
+                    console.log('se elimino de manera correctamente')
+                }
+            }).catch(error =>{
+
+            });
             },
             cargarMateria(materiaid){
             //let programaid = this.programa.id;

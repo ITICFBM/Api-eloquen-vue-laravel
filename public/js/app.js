@@ -2018,15 +2018,78 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       //array para obtener todos las materias
       materias: [],
-      //array para obtener solo una materia
-      //materia: [],
+      //array para obtener eliminar una materia materia
+      materiadelete: [],
       //array para modificar una materia en especifico
-      materiaedit: []
+      materiaedit: [],
+      //guardar la materia
+      nueamateria: {
+        nombre: ""
+      }
     };
   },
   mounted: function mounted() {
@@ -2056,6 +2119,20 @@ __webpack_require__.r(__webpack_exports__);
         } else {
           toastr.success(response.data.mensaje);
           $('#exampleModal').modal('hide');
+        }
+      })["catch"](function (error) {});
+    },
+    deleteid: function deleteid(id) {
+      this.materiadelete = id;
+    },
+    deleteMateria: function deleteMateria(id) {
+      var urldeleteMateria = 'materias/' + id;
+      axios["delete"](urldeleteMateria, this.materiadelete).then(function (response) {
+        if (response.data.error) {
+          //mensaje de error
+          consolo.log('ocurrio un error');
+        } else {
+          console.log('se elimino de manera correctamente');
         }
       })["catch"](function (error) {});
     },
@@ -37806,8 +37883,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
     _c("table", { staticClass: "table" }, [
-      _vm._m(0),
+      _vm._m(1),
       _vm._v(" "),
       _c(
         "tbody",
@@ -37836,7 +37915,23 @@ var render = function() {
                 [_c("i", { staticClass: "fas fa-pen" })]
               ),
               _vm._v(" "),
-              _vm._m(1, true)
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  attrs: {
+                    "data-toggle": "modal",
+                    "data-target": "#deletemateria",
+                    type: "button"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteid(materia)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-trash" })]
+              )
             ])
           ])
         }),
@@ -37921,10 +38016,99 @@ var render = function() {
           ]
         )
       ]
+    ),
+    _vm._v(" "),
+    _vm._m(4),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "deletemateria",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(5),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("h4", [
+                  _vm._v("¿Esta seguro que quieres eliminar la materia "),
+                  _c(
+                    "span",
+                    { staticClass: "badge badge-pill badge-warning" },
+                    [_vm._v(_vm._s(_vm.materiadelete.nombre))]
+                  ),
+                  _vm._v("?")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cancelar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteMateria(_vm.materiadelete.id)
+                      }
+                    }
+                  },
+                  [_vm._v("Eliminar")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
     )
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-between" }, [
+      _c("div", { staticClass: "col-4" }, [
+        _vm._v("\n            Tabla Materias\n            ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-4" }, [
+        _c(
+          "button",
+          {
+            staticClass: "justify-content-center btn btn-primary",
+            attrs: {
+              "data-toggle": "modal",
+              "data-target": "#guardarModal",
+              type: "button"
+            }
+          },
+          [_c("i", { staticClass: "fas fa-plus-circle" })]
+        )
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -37938,16 +38122,6 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Operaciones")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-danger", attrs: { type: "button" } },
-      [_c("i", { staticClass: "fas fa-trash" })]
-    )
   },
   function() {
     var _vm = this
@@ -37995,6 +38169,126 @@ var staticRenderFns = [
           attrs: { ttype: "submit", name: "action" }
         },
         [_vm._v("Actualizar")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "guardarModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "exampleModalLabel" }
+                  },
+                  [_vm._v("Alta De Materia Desde un componente de vue")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("form", [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "recipient-name" }
+                      },
+                      [_vm._v("Materia:")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "recipient-name" }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Cancelar")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { ttype: "submit", name: "action" }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Eliminar Materia")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
     ])
   }
