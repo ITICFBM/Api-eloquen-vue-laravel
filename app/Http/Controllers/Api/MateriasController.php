@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 //importar nuestro modelo a ocupar 
 use App\Materias;
 //Mandamos a llamar el request a traves de un alias  de MateriaRequests 
-use App\Http\Requests\Materias as MateriaRequests;
+use App\Http\Requests\Materia as MateriaRequests;
 
 
 class MateriasController extends Controller
@@ -56,7 +56,12 @@ class MateriasController extends Controller
     {
         //return $request;
         $materia = $this->materia->create($request->all());
-        return  response()->json($materia);
+        if($materia = true){
+            return response()->json(['error'=>true,'mensaje'=>'La Materia se guardo con exito']);
+        }else{
+            return response()->json(['error'=>false,'mensaje'=>'Error al intentar guaradar el registro']);
+        }
+        //return  response()->json($materia);
         //return response()->json(new MateriaRequests($materia), 201); 
     }
 
@@ -96,11 +101,14 @@ class MateriasController extends Controller
      */
     public function update(MateriaRequests  $request, Materias $materia)
     {
-        
         //return $request;
         $materia->update($request->all());
 
-        return  response()->json('El registro fue modficado con exito');
+        if($materia = true){
+            return response()->json(['error'=>true,'mensaje'=>'La Materia se actualizo con exito']);
+        }else{
+            return response()->json(['error'=>false,'mensaje'=>'Error al intentar guaradar el registro']);
+        }
     }
 
     /**

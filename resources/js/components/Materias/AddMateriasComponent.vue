@@ -1,5 +1,10 @@
+<template>
+    <div>
+      <h2>Hola mundo3</h2>
+    </div>
+</template>
 <script>
-//import { Bus } from "../../app.js"
+import { Bus } from "../../app.js"
 export default {
   data(){
     return{

@@ -13,25 +13,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    <post-component inline-template>
-                        <table class="table table-hover table-striped">
-                        <thead>
-                            <tr>
-                            <th>Nombre</th>
-                            <th>Operaciones</th>
-                            </thead>
-                            <body>
-                                <tr v-for="pokemon in pokemons">
-                                <td v-text="pokemon.nombre"></td>
-                                <td>
-                                <button data-target="#exampleModalCenter" title="Ver Materia" type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                                <button type="button" class="btn btn-secondary"><i class="fas fa-pen"></i></button>
-                                <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button></td>
-                                </tr>
-                            </body>
-
-                    </post-component>
+                    <!-- Se manda a llamar el componente de  materias -->
+                    <materias>
+                    </materias>
                     
                 </div>
             </div>

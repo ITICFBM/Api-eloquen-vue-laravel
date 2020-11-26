@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    <post-component inline-template>
+                    <post inline-template>
                         <table class="table table-hover table-striped">
                         <thead>
                             <tr>
@@ -23,12 +23,12 @@
                             </thead>
                             <body>
                                 <tr v-for="pokemon in pokemons">
-                                <td v-text="pokemon.nombre"></td>
-                                <!--<td v-text="pokemon.url"></td>-->
+                                <td v-text="pokemon.name"></td>
+                                <td v-text="pokemon.url"></td>
                                 </tr>
                             </body>
 
-                    </post-component>
+                    </post>
                 </div>
             </div>
         </div>

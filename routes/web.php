@@ -24,7 +24,7 @@ Route::get('/', 'PageController@index');
 
 Auth::routes();
 //Ruta De Home esta ruta estra protegida por auth
-Route::get('/Materias', 'Backend\HomeController@index')->name('home');
+Route::get('/materias', 'Backend\HomeController@index')->name('home');
 
 //Ruta De MATERIAS esta ruta estra protegida por auth
 //Route::get('/materias', 'Backend\MateriasController@index')->name('materias');
