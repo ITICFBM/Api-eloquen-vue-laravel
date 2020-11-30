@@ -68,14 +68,14 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form >
+                                <form @submit.prevent="CrearMateria()">
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Materia:</label>
-                                    <input type="text"  class="form-control" id="recipient-name">
+                                    <input type="text" v-model="nuevamateria.nombre" class="form-control" id="recipient-name">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button ttype="submit" name="action" class="btn btn-primary">Guardar</button>
+                                    <button type="submit" name="action" class="btn btn-primary">Guardar</button>
                                 </div>
                                 </form>
                             </div>
@@ -120,9 +120,10 @@
                 //array para modificar una materia en especifico
                 materiaedit: [],
                 //guardar la materia
-                nueamateria:{
-                    nombre : ""
+                nuevamateria:{
+                    nombre:""
                 }
+             
             }
         },
         mounted() {
@@ -172,18 +173,23 @@
             }).catch(error =>{
 
             });
-            },
-            cargarMateria(materiaid){
-            //let programaid = this.programa.id;
-            let url = 'materias/' + materiaid;
-            axios.get(url).then(response=>{
-                if(response.data.error){
-                //manejo de error
+        },
+        CrearMateria(){
+            let url="materias";
+            axios.post(url,this.nuevamateria).then(resp=>{
+                if(resp.data.error){
+                    console.log("ocurrio un error al guarda");
                 }else{
-                this.materia=reponse.data.materia;
+                    this.nuevamateria.nombre="";
+                    $('#guardarModal').modal('hide');
+                    toastr.success(response.data.mensaje);
+
+                    console.log("la materia de sio de alta con exito");
                 }
+            }).catch(error=>{
+                console.log(error);
             });
-            } 
+         }
         }
     }
 </script>
