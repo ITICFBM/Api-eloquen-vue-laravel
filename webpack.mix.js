@@ -11,5 +11,13 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+/* mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
+ */
+
+mix.js('resources/assets/js/app.js','public/js')
+.sass('resources/assets/sass/app.scss', '../resources/assets/css')
+ //*se une el archivo de app.css de materialize con lo s estilos propios para crear un solo archivo con nombre app.css*
+.styles([
+  'resources/assets/css/toast.css',
+], 'public/css/app.css');

@@ -177,14 +177,14 @@
         CrearMateria(){
             let url="materias";
             axios.post(url,this.nuevamateria).then(resp=>{
-                if(resp.data.error){
+                if(resp.data.error = false){
                     console.log("ocurrio un error al guarda");
                 }else{
                     this.nuevamateria.nombre="";
                     $('#guardarModal').modal('hide');
-                    toastr.success(response.data.mensaje);
+                    toastr.success(response.data.error);
 
-                    console.log("la materia de sio de alta con exito");
+                    //console.log("la materia de sio de alta con exito");
                 }
             }).catch(error=>{
                 console.log(error);

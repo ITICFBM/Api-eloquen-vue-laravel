@@ -24,7 +24,7 @@ export default {
       let url="api/materias";
       //let nuevodia=this.nuevodia;
       axios.post(url,this.nuevamateria).then(resp=>{
-        if(resp.data.error){
+        if(resp.data.error = false){
           //manejo de error
             toast.warnig('No se encontraron registro para la tabla Materias');
         }else{

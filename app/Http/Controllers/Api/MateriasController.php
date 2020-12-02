@@ -56,7 +56,7 @@ class MateriasController extends Controller
     {
         //return $request;
         $materia = $this->materia->create($request->all());
-        if($materia = true){
+        if($materia  == true){
             return response()->json(['error'=>true,'mensaje'=>'La Materia se guardo con exito']);
         }else{
             return response()->json(['error'=>false,'mensaje'=>'Error al intentar guaradar el registro']);
