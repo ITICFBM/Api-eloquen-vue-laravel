@@ -149,9 +149,10 @@
                     toastr.error("ocurrio un error");
                 }else{
                     //se guarda  la materia y se manda mensaje de succes con toastr
-                    toastr.info('La materia se actualizo  con exito '); // se ejecuta la alerta
+                    toastr.info('La materia se actualizo'); // se ejecuta la alerta
                     //Se cierra el Modal
                     $('#exampleModal').modal('hide')
+
                 }
                 }).catch(error=>{
 
