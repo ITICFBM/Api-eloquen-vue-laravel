@@ -7,8 +7,12 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+// event-bus.js
+import Vue from 'vue';
 
+const EventBus = new Vue();
 
+export default EventBus;
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -20,8 +24,8 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 //export const Bus = new Vue();
-import axios from 'axios';
 axios.defaults.baseURL = 'http://127.0.0.1:8000/api/';
+
 Vue.component('materias', require('./components/Materias/MateriasComponent.vue').default);
 Vue.component('add-materias', require('./components/Materias/AddMateriasComponent.vue').default);
 Vue.component('show-materias', require('./components/Materias/ShowMateriasComponent.vue').default);
@@ -31,7 +35,7 @@ Vue.component('post', require('./components/PostComponent.vue').default);
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
- */
+ */ 
 
 const app = new Vue({
     el: '#app',

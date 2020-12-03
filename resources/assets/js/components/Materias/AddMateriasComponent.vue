@@ -4,7 +4,6 @@
     </div>
 </template>
 <script>
-import { Bus } from "../../app.js"
 export default {
   data(){
     return{

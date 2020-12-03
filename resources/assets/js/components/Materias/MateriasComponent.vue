@@ -2,9 +2,6 @@
     <div>
           <div class="row justify-content-between">
                 <div class="col-4">
-                Tabla Materias
-                </div>
-                <div class="col-4">
                             <button data-toggle="modal" data-target="#guardarModal" type="button" class="justify-content-center btn btn-primary"><i class="fas fa-plus-circle"></i></button>
                 </div>
             </div>
@@ -110,6 +107,7 @@
 </template>
 
 <script>
+
     export default {
         data (){
             return{
@@ -128,68 +126,78 @@
         },
         mounted() {
             this.getMaterias();
-            console.log('se carga la función o el array getPokemons y el axios')
         },
-
         methods: {
             //función para obtener todas las materias de /api/materia con axios
-            getMaterias: function () {
+            getMaterias: function(){
                  axios.get('materias').then(response => {
                     this.materias = response.data.materias
-                    console.log (this.materias);
                 });
             },
-            //función para obtener el id
+            //función para obtener el id de la materia
             updateid(id){
                 this.materiaedit = id;
             },
             //función para editar Materia
             editarMateria(){
+                //obtenemos el id de la materia
                 let urlUpdate='materias/'+ this.materiaedit.id;
+                //actualizamos la materia
                 axios.put(urlUpdate,this.materiaedit).then(response =>{
+                    //si hay un error se ejecuta el error
                 if(response.data.error){
-                    toastr.error(response.data.mensaje);
-
+                    toastr.error("ocurrio un error");
                 }else{
-                    toastr.success(response.data.mensaje);
+                    //se guarda  la materia y se manda mensaje de succes con toastr
+                    toastr.info('La materia se actualizo  con exito '); // se ejecuta la alerta
+                    //Se cierra el Modal
                     $('#exampleModal').modal('hide')
                 }
                 }).catch(error=>{
 
                 });
             },
+            //se obtiene el id para elimanar la materia
             deleteid(id){
                 this.materiadelete =id; 
             },
+            //metodo para eleminar la materia
             deleteMateria(id){
+                //enpoint con el id de la materia
                 let urldeleteMateria = 'materias/' + id;
+                //eliminamos la materia
                 axios.delete(urldeleteMateria,this.materiadelete).then (response=>{
                     if(response.data.error){
-                    //mensaje de error
-                    consolo.log('ocurrio un error');
+                    //mensaje de error si existe un errror
+                    toast.error('ocurrio un error');
                 }else{
-                    console.log('se elimino de manera correctamente')
-                }
+                // se elimina la materia
+                    toastr.info('La materia se elimino con exito '); // se ejecuta la alerta
+                // se cierrra el modal 
+                $('#deletemateria').modal('hide');
+
+            }
             }).catch(error =>{
+                toastr.error('error al actualizar');
 
             });
         },
         CrearMateria(){
+            //declaramos la url
             let url="materias";
-            axios.post(url,this.nuevamateria).then(resp=>{
-                if(resp.data.error = false){
-                    console.log("ocurrio un error al guarda");
-                }else{
-                    this.nuevamateria.nombre="";
-                    $('#guardarModal').modal('hide');
-                    toastr.success(response.data.error);
-
-                    //console.log("la materia de sio de alta con exito");
-                }
+            //genermos el post para guardar la materia
+            axios.post(url,this.nuevamateria).then(response=>{
+               //pasamos el nombrela materia y guardamos 
+                this.nuevamateria.nombre="";
+                //cerramos el modal
+                $('#guardarModal').modal('hide');
+                toastr.success('La materia se guardo con exito'); // se ejecuta la alerta
+                this.getMaterias();
             }).catch(error=>{
-                console.log(error);
+                toastr.error('error al guardar');
             });
          }
-        }
+        },
+
     }
 </script>
